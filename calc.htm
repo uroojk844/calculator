@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="fontawesome-free/css/all.min.css">
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            user-select: none;
+        }
+        
+        .frame{
+            box-shadow: 0 0 4px rgba(0,0,0,0.6);
+            border-radius: 4px;
+        }
+
+        .nav{
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: space-between;
+            padding: 5px 7px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .nav .controls{
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 5px;
+        }
+
+        .nav .controls div{
+            width: 17px;
+            height: 17px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .nav .controls .close{
+            background-color: tomato;   
+        }
+
+        .nav .controls .minimize{
+            background-color: dodgerblue;   
+        }
+
+        .nav .name{
+            font-weight: bold;
+        }
+
+        .calc{
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 16px;
+        }
+
+        .frame .calc input{
+            grid-column: 1/5;
+            outline: none;
+            text-align: right;
+        }
+
+        .calc input,.button{
+            display: grid;
+            place-items: center;
+            border: none;
+            font-size: 18px;
+            background-color: #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            height: 46px;
+        }
+
+        .calc .button:hover{
+            background-color: #eee;
+        }
+
+        .calc .button:active{
+            background-image: radial-gradient(#fff,#ccc );
+        }
+
+        .more{
+            display: none;
+        }
+
+        .equals{
+            grid-column: 2/5;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="nav">
+            <div class="name">Calculator</div>
+            <div class="controls">
+                <div class="minimize">
+                    <i class="fas fa-minus"></i>
+                </div>
+                <div class="close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        <div class="calc">
+            <input type="text" class="disp" placeholder="0" readonly>
+            <button class="button" value="1">1</button>
+            <button class="button" value="2">2</button>
+            <button class="button" value="3">3</button>
+            <button class="button plus" value="+">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button class="button" value="4">4</button>
+            <button class="button" value="5">5</button>
+            <button class="button" value="6">6</button>
+            <button class="button minus" value="-">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="button" value="7">7</button>
+            <button class="button" value="8">8</button>
+            <button class="button" value="9">9</button>
+            <button class="button multi" value="*">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="button" value=".">.</button>
+            <button class="button" value="0">0</button>
+            <button class="button backspace">
+                <i class="fas fa-backspace"></i>
+            </button>
+            <button class="button divide" value="/">
+                <i class="fas fa-divide"></i>
+            </button>
+            <button class="button clear">C</button>
+            <button class="button equals">
+                <i class="fas fa-equals"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let disp = document.querySelector('.disp');
+        
+        let buttons = document.querySelectorAll('.button');
+        buttons.forEach(v => {
+            v.onclick = () =>{
+                disp.value += v.value;
+            }
+        });
+        
+        document.querySelector('.equals').onclick = () =>{
+            if(disp.value.length>0)
+            disp.value = eval(disp.value);
+        }
+
+        document.querySelector('.clear').onclick = () =>{
+            disp.value = "";
+        }
+
+        document.querySelector('.backspace').onclick = () =>{
+            disp.value = disp.value.substr(0, disp.value.length-1);
+        }
+    </script>
+</body>
+</html>
